@@ -34,14 +34,16 @@ __attribute__((objc_direct_members))
 
 - (id)objectForKey:(id)key
 {
-    __block id object;
-    dispatch_block_t block = ^{
-        object = [self->_mapTable objectForKey:key];
-    };
-    if (_queue) {
-        dispatch_sync(_queue, block);
-    } else {
-        block();
+    __block id object = [_cache objectForKey:key];
+    if (!object) {
+        dispatch_block_t block = ^{
+            object = [self->_mapTable objectForKey:key];
+        };
+        if (_queue) {
+            dispatch_sync(_queue, block);
+        } else {
+            block();
+        }
     }
     return object;
 }

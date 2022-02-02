@@ -56,13 +56,14 @@ __attribute__((objc_direct_members))
     __block id object;
     dispatch_block_t block = ^{
         object = [self->_objects anyObject];
+        [self->_objects removeObject:object];
+        [self->_cache removeObjectForKey:object]; // This ends up invoking -cache:willEvictObject:
     };
     if (_queue) {
         dispatch_sync(_queue, block);
     } else {
         block();
     }
-    [_cache removeObjectForKey:object]; // This ends up invoking -cache:willEvictObject:
     return object;
 }
 
@@ -72,7 +73,7 @@ __attribute__((objc_direct_members))
         [self->_objects removeObject:obj];
     };
     if (_queue) {
-        dispatch_sync(_queue, block);
+        dispatch_async(_queue, block);
     } else {
         block();
     }

@@ -55,7 +55,14 @@ __attribute__((objc_direct_members))
 
 - (void)setObject:(id)obj forKey:(id)key
 {
-    [_cache setObject:obj forKey:key];
+    [self setObject:obj forKey:key weakOnly:NO];
+}
+
+- (void)setObject:(id)obj forKey:(id)key weakOnly:(BOOL)weakOnly
+{
+    if (!weakOnly) {
+        [_cache setObject:obj forKey:key];
+    }
     dispatch_block_t block = ^{
         [self->_mapTable setObject:obj forKey:key];
     };

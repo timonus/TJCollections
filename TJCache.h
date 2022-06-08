@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable ObjectType)objectForKey:(KeyType)key;
 - (void)setObject:(nullable ObjectType)obj forKey:(KeyType)key;
+- (void)setObject:(nullable ObjectType)obj forKey:(KeyType)key weakOnly:(BOOL)weakOnly;
 
 - (nullable ObjectType)objectForKeyedSubscript:(KeyType)key;
 - (void)setObject:(nullable ObjectType)obj forKeyedSubscript:(KeyType)key;

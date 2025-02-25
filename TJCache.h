@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
                values:(BOOL)values
             withBlock:(void (NS_NOESCAPE ^)(KeyType _Nullable key, ObjectType _Nullable value))block;
 
+- (NSDictionary<KeyType, ObjectType> *)dictionaryRepresentation;
+
 @end
 
 NS_ASSUME_NONNULL_END

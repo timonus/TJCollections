@@ -120,5 +120,17 @@ __attribute__((objc_direct_members))
         enumerateBlock();
     }
 }
+- (NSDictionary *)dictionaryRepresentation
+{
+    __block NSDictionary *dictionaryRepresentation;
+    if (_queue) {
+        dispatch_sync(_queue, ^{
+            dictionaryRepresentation = [_mapTable dictionaryRepresentation];
+        });
+    } else {
+        dictionaryRepresentation = [_mapTable dictionaryRepresentation];
+    }
+    return dictionaryRepresentation;
+}
 
 @end

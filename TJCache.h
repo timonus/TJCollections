@@ -6,19 +6,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TJConcurrentMutableCollection.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TJCache<__covariant KeyType, __covariant ObjectType> : NSObject
+@interface TJCache<__covariant KeyType, __covariant ObjectType> : TJConcurrentMutableCollection
 
-- (instancetype)initWithThreadSafety:(BOOL)threadSafety NS_DESIGNATED_INITIALIZER;
-
-- (nullable ObjectType)objectForKey:(KeyType)key;
-- (void)setObject:(nullable ObjectType)obj forKey:(KeyType)key;
 - (void)setObject:(nullable ObjectType)obj forKey:(KeyType)key weakOnly:(BOOL)weakOnly;
-
-- (nullable ObjectType)objectForKeyedSubscript:(KeyType)key;
-- (void)setObject:(nullable ObjectType)obj forKeyedSubscript:(KeyType)key;
 
 @property (nonatomic) NSUInteger countLimit;
 

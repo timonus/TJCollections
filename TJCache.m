@@ -14,13 +14,23 @@ __attribute__((objc_direct_members))
 }
 
 - (instancetype)init {
-    return [super initWithCollection:self
+    if (self = [super initWithCollection:self
                           writeBlock:^(id key, id obj, TJCache *collection) {
         [collection->_cache setObject:obj forKey:key];
         [collection->_mapTable setObject:obj forKey:key];
-    } readBlock:^id _Nonnull(id _Nonnull key, TJCache *collection) {
-        return collection->_cache;
-    } queue:nil];
+    }
+                               readBlock:^id _Nonnull(id _Nonnull key, TJCache *collection) {
+        id obj = [collection->_cache objectForKey:key];
+        if (obj == nil) {
+            obj = [collection->_mapTable objectForKey:key];
+        }
+        return obj;
+    }
+                                   queue:nil]) {
+        _cache = [NSCache new];
+        _mapTable = [NSMapTable strongToWeakObjectsMapTable];
+    }
+    return self;
 }
 
 - (void)setCountLimit:(NSUInteger)countLimit

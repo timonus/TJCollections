@@ -14,6 +14,12 @@
     id (^_readBlock)(id, id);
 }
 
+
+- (instancetype)init
+{
+    return [self initWithDictionary:nil queue:nil];
+}
+
 - (instancetype)initWithCollection:(id)collection writeBlock:(void (^)(id _Nonnull, id _Nonnull, id _Nonnull))writeBlock readBlock:(id  _Nonnull (^)(id _Nonnull, id _Nonnull))readBlock queue:(nullable dispatch_queue_t)queue
 {
     if (self = [super init]) {

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithCollection:(CollectionType)collection
                         writeBlock:(void (^)(KeyType, _Nullable ObjectType, CollectionType))writeBlock
                          readBlock:(nullable ObjectType (^)(KeyType, CollectionType))readBlock
-                             queue:(nullable dispatch_queue_t)queue;
+                             queue:(nullable dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, readonly) dispatch_queue_t queue;
 

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TJConcurrentMutableCollection<__covariant KeyType, __covariant ObjectType, __covariant CollectionType> : NSObject
 
 - (instancetype)initWithCollection:(CollectionType)collection
-                        writeBlock:(void (^)(KeyType, ObjectType, CollectionType))writeBlock
+                        writeBlock:(void (^)(KeyType, _Nullable ObjectType, CollectionType))writeBlock
                          readBlock:(nullable ObjectType (^)(KeyType, CollectionType))readBlock
                              queue:(nullable dispatch_queue_t)queue;
 

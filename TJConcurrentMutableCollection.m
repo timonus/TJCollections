@@ -81,8 +81,7 @@
 - (void)objectForKey:(id)key completion:(void (^)(_Nullable id))completion
 {
     dispatch_async(_queue, ^{
-        id obj = _readBlock(key, _collection);
-        completion(obj);
+        completion(self->_readBlock(key, self->_collection));
     });
 }
 
@@ -94,7 +93,7 @@
         });
     } else {
         dispatch_async(_queue, ^{
-            completion(_collection);
+            completion(self->_collection);
         });
     }
 }
@@ -112,7 +111,7 @@
         });
     } else {
         dispatch_barrier_async(_queue, ^{
-            _writeBlock(key, obj, _collection);
+            self->_writeBlock(key, obj, self->_collection);
         });
     }
 }

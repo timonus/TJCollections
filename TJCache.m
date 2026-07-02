@@ -69,7 +69,7 @@ __attribute__((objc_direct_members))
 - (void)setObject:(nullable id)obj forKey:(nonnull id)key weakOnly:(BOOL)weakOnly {
     if (weakOnly) {
         dispatch_barrier_async(self.queue, ^{
-            [_mapTable setObject:obj forKey:key];
+            [self->_mapTable setObject:obj forKey:key];
         });
     } else {
         [self setObject:obj forKey:key];

@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) dispatch_queue_t queue;
 
 - (nullable ObjectType)objectForKey:(KeyType)key __attribute__((objc_direct));
+/// NOTE: `completion` is invoked on instance's `queue`.
 - (void)objectForKey:(KeyType)key completion:(void (^)(_Nullable ObjectType))completion __attribute__((objc_direct));
 - (void)setObject:(nullable ObjectType)obj forKey:(KeyType)key __attribute__((objc_direct));
 - (void)setObject:(nullable ObjectType)obj forKey:(KeyType)key waitUntilDone:(BOOL)waitUntilDone __attribute__((objc_direct));
@@ -29,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable ObjectType)objectForKeyedSubscript:(KeyType)key __attribute__((objc_direct));
 - (void)setObject:(nullable ObjectType)obj forKeyedSubscript:(KeyType)key __attribute__((objc_direct));
 
+/// NOTE: Intended only for use for batch reads. Writing in this block could cause a crash.
 - (void)readCollection:(void (^)(CollectionType))completion waitUntilDone:(BOOL)waitUntilDone __attribute__((objc_direct));
 
 // Convenience initializers

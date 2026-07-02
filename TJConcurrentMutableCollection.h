@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)objectForKey:(KeyType)key completion:(void (^)(_Nullable ObjectType))completion __attribute__((objc_direct));
 - (void)setObject:(nullable ObjectType)obj forKey:(KeyType)key __attribute__((objc_direct));
 - (void)setObject:(nullable ObjectType)obj forKey:(KeyType)key waitUntilDone:(BOOL)waitUntilDone __attribute__((objc_direct));
+- (void)removeObjectForKey:(KeyType)key __attribute__((objc_direct));
+- (void)removeObjectForKey:(KeyType)key waitUntilDone:(BOOL)waitUntilDone __attribute__((objc_direct));
 
 - (nullable ObjectType)objectForKeyedSubscript:(KeyType)key __attribute__((objc_direct));
 - (void)setObject:(nullable ObjectType)obj forKeyedSubscript:(KeyType)key __attribute__((objc_direct));

@@ -117,6 +117,16 @@
     }
 }
 
+- (void)removeObjectForKey:(id)key
+{
+    [self setObject:nil forKey:key waitUntilDone:NO];
+}
+
+- (void)removeObjectForKey:(id)key waitUntilDone:(BOOL)waitUntilDone
+{
+    [self setObject:nil forKey:key waitUntilDone:waitUntilDone];
+}
+
 - (void)setObject:(id)obj forKeyedSubscript:(id)key
 {
     [self setObject:obj forKey:key];

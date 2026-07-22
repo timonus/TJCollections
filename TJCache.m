@@ -16,7 +16,11 @@ __attribute__((objc_direct_members))
 - (instancetype)init {
     if (self = [super initWithCollection:self
                           writeBlock:^(id key, id obj, TJCache *collection) {
-        [collection->_cache setObject:obj forKey:key];
+        if (obj) {
+            [collection->_cache setObject:obj forKey:key];
+        } else {
+            [collection->_cache removeObjectForKey:key];
+        }
         [collection->_mapTable setObject:obj forKey:key];
     }
                                readBlock:^id _Nonnull(id _Nonnull key, TJCache *collection) {
